@@ -9,6 +9,7 @@
 <html>
 <head>
 
+
     <link
             href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
             rel="stylesheet"
@@ -31,6 +32,8 @@
             defer
     ></script>
     <script src="${pageContext.request.contextPath}/view/signUp/js/confirmEmail.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/view/jquery_libs/jquery.min.js" type="text/javascript"></script>
+
     <title>SignUp</title>
 
 </head>
@@ -65,6 +68,8 @@
                             id="cfemailCode"
                     />
                     <input
+                            name="btnConfirmCode"
+                            id="btnConfirmCode"
                             onclick="validate()"
                             type="button"
                             value="Create User"
@@ -81,9 +86,7 @@
                             Privacy Policy
                         </a>
                     </p>
-
                 </form>
-
             </div>
         </div>
     </div>
@@ -95,5 +98,28 @@
     </div>
 
 </div>
+<script>
+    function validate() {
+        var code = document.getElementById("cfemailCode").value;
+
+        if (/^[0-9a-zA-Z]{6}$/.test(code)) {
+            $.ajax({
+                url: '/Chat_Web/confirmEmail',
+                type: 'POST',
+                data: {
+                    cfcodebyUser: '123456'
+                },
+
+                success: function () {
+
+                },
+            });
+        } else {
+            alert("Wrong Format Code!!");
+        }
+    }
+
+</script>
 </body>
+
 </html>

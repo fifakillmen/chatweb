@@ -13,7 +13,6 @@ import java.io.PrintWriter;
 
 public class confirmEmailController extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         model.account account = (model.account) req.getSession().getAttribute("account");
@@ -40,17 +39,11 @@ public class confirmEmailController extends HttpServlet {
         model.account account = (model.account) req.getSession().getAttribute("account");
         if (account != null) {
             String confirmEmailCode = (String) req.getSession().getAttribute("confirmEmailCode");
-            String cfCodebyUser = req.getParameter("cfemailCode");
+            String cfCodebyUser = req.getParameter("cfcodebyUser");
             if (cfCodebyUser.equals(confirmEmailCode)) {
                 req.getRequestDispatcher("./view/createUser/creatUser.jsp").forward(req, resp);
             } else {
-                resp.setContentType("text/html");
-                PrintWriter pw = resp.getWriter();
-                pw.println("<script type=\"text/javascript\">");
-                pw.println("alert('Wrong Code');");
-                pw.println("</script>");
-                RequestDispatcher rd = req.getRequestDispatcher("./view/signUp/confirmEmail.jsp");
-                rd.include(req, resp);
+
             }
         } else {
             resp.getWriter().println("ngu");
