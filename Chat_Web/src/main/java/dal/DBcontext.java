@@ -18,12 +18,13 @@ public class DBcontext {
         try {
             String user = "sonbn";
             String password = "201001";
-            String url = "jdbc:sqlserver://localhost:1433;database=ChattWeb";
+            String url = "jdbc:sqlserver://localhost:1433;" +
+                    "database=ChattWeb;" +
+                    "encrypt=true;" +
+                    "trustServerCertificate=true";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 

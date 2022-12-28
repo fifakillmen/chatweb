@@ -22,5 +22,31 @@
         <servlet-name>confirmEmailController</servlet-name>
         <url-pattern>/confirmEmail</url-pattern>
     </servlet-mapping>
-
+    <!-- ============================ -->
+    <servlet>
+        <servlet-name>createUserController</servlet-name>
+        <servlet-class>controller.createUserController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>createUserController</servlet-name>
+        <url-pattern>/createUser</url-pattern>
+    </servlet-mapping>
+    <!-- ============================ -->
+    <servlet>
+        <servlet-name>signInController</servlet-name>
+        <servlet-class>controller.signInController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>signInController</servlet-name>
+        <url-pattern>/signIn</url-pattern>
+    </servlet-mapping>
+    <!-- ============================ -->
+    <servlet>
+        <servlet-name>homeController</servlet-name>
+        <servlet-class>controller.homeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>homeController</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
 </web-app>

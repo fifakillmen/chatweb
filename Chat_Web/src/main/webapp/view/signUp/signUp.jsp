@@ -31,6 +31,8 @@
             defer
     ></script>
     <script src="${pageContext.request.contextPath}/view/signUp/js/signUp.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/view/jquery_libs/jquery.min.js" type="text/javascript"></script>
+
     <title>SignUp</title>
 
 </head>

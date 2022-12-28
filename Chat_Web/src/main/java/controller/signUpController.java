@@ -1,5 +1,6 @@
 package controller;
 
+import dal.accountDBcontext;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -23,19 +24,25 @@ public class signUpController extends HttpServlet {
         String password = req.getParameter("password").trim();
         String cfpassword = req.getParameter("cfpassword").trim();
         String mess = "";
+        dal.accountDBcontext db = new accountDBcontext();
+        boolean emailIsExist = db.accountIsExist(email);
         if (email.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$")) {
-            if (password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")) {
-                if (cfpassword.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")) {
-                    if (password.equals(cfpassword)) {
+            if (emailIsExist == false) {
+                if (password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")) {
+                    if (cfpassword.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")) {
+                        if (password.equals(cfpassword)) {
 
+                        } else {
+                            mess += "\nConfirm password must be same Password!!";
+                        }
                     } else {
-                        mess += "\nConfirm password must be same Password!!";
+                        mess += "\nConfirm password invalid!!";
                     }
                 } else {
-                    mess += "\nConfirm password invalid!!";
+                    mess += "\nPassword invalid!!";
                 }
             } else {
-                mess += "\nPassword invalid!!";
+                mess = "Email already used!!";
             }
         } else {
             mess = "Email invalid!!";
@@ -45,9 +52,9 @@ public class signUpController extends HttpServlet {
             account.setEmail(email);
             account.setPassword(password);
             req.getSession().setAttribute("account", account);
-            resp.sendRedirect("confirmEmail");
+            resp.getWriter().print("confirmEmail");
         } else {
-            resp.getWriter().println(mess);
+            resp.getWriter().print(mess);
         }
     }
 }

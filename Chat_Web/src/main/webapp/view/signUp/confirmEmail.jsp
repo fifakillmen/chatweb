@@ -72,7 +72,7 @@
                             id="btnConfirmCode"
                             onclick="validate()"
                             type="button"
-                            value="Create User"
+                            value="Confirm Email"
                             class="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                     />
 
@@ -100,24 +100,29 @@
 </div>
 <script>
     function validate() {
-        var code = document.getElementById("cfemailCode").value;
+        var cfcodebyUser = document.getElementById("cfemailCode").value;
 
-        if (/^[0-9a-zA-Z]{6}$/.test(code)) {
+        if (/^[0-9a-zA-Z]{6}$/.test(cfcodebyUser)) {
             $.ajax({
-                url: '/Chat_Web/confirmEmail',
+                url: '/Chat_Web_war_exploded/confirmEmail',
                 type: 'POST',
                 data: {
-                    cfcodebyUser: '123456'
+                    cfcodebyUser: cfcodebyUser
                 },
 
-                success: function () {
-
+                success: function (data) {
+                    if (data.toString() === "false") {
+                        alert("Wrong confirm Code!!!");
+                    } else {
+                        window.location = "/Chat_Web_war_exploded/" + data;
+                    }
                 },
             });
         } else {
             alert("Wrong Format Code!!");
         }
     }
+
 
 </script>
 </body>

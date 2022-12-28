@@ -30,23 +30,24 @@ public class confirmEmailController extends HttpServlet {
             req.getSession().setAttribute("confirmEmailCode", code);
             req.getRequestDispatcher("./view/signUp/confirmEmail.jsp").forward(req, resp);
         } else {
-            resp.getWriter().println("ngu");
+            resp.getWriter().println("chuyen ve trang login");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         model.account account = (model.account) req.getSession().getAttribute("account");
+        PrintWriter out = resp.getWriter();
         if (account != null) {
             String confirmEmailCode = (String) req.getSession().getAttribute("confirmEmailCode");
             String cfCodebyUser = req.getParameter("cfcodebyUser");
             if (cfCodebyUser.equals(confirmEmailCode)) {
-                req.getRequestDispatcher("./view/createUser/creatUser.jsp").forward(req, resp);
+                out.print("createUser");
             } else {
-
+                out.print("false");
             }
         } else {
-            resp.getWriter().println("ngu");
+            resp.getWriter().println("chuyen ve trang login");
         }
 
     }
