@@ -11,6 +11,9 @@ public class user {
 
     private String phone;
 
+    private String avatar;
+    private boolean gender;
+
     public int getUid() {
         return uid;
     }
@@ -59,11 +62,11 @@ public class user {
         this.phone = phone;
     }
 
-    public byte[] getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(byte[] avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
@@ -74,9 +77,4 @@ public class user {
     public void setGender(boolean gender) {
         this.gender = gender;
     }
-
-    private byte[] avatar;
-    private boolean gender;
-
-
 }
